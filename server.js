@@ -28,23 +28,31 @@ app.get("/api/notes", (req, res) => {
 // post route
 app.post("/api/notes", (req, res) => {
   let notes = JSON.parse(fs.readFileSync("db/db.json"));
-//   console.log(notes);
+  //   console.log(notes);
   let newNotes = {
     title: req.body.title,
     text: req.body.text,
-    id: Math.floor(Math.random()*1000)
-  }
+    id: Math.floor(Math.random() * 1000),
+  };
 
-  notes.push(newNotes)
-
+  notes.push(newNotes);
 
   fs.writeFileSync("db/db.json", JSON.stringify(notes));
   res.json(notes);
 
-//   console.log(notes);
+  //   console.log(notes);
 });
 
-//
+// delete route
+app.delete('/api/notes/:id', (req, res)=>{
+    let notes = JSON.parse(fs.readFileSync("db/db.json"));
+    let notesId = (req.body.id).toString()
+    
+    deletedNotes = notes.filter(note => note.id !== notesId)
+    fs.writeFileSync("db/db.json", JSON.stringify(deletedNotes));
+    res.json(deletedNotes);
+
+})
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
