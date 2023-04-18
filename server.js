@@ -25,13 +25,26 @@ app.get("/api/notes", (req, res) => {
   res.sendFile(path.join(__dirname, "/db/db.json"));
 });
 
+// post route
+app.post("/api/notes", (req, res) => {
+  let notes = JSON.parse(fs.readFileSync("db/db.json"));
+//   console.log(notes);
+  let newNotes = {
+    title: req.body.title,
+    text: req.body.text,
+    id: Math.floor(Math.random()*1000)
+  }
+
+  notes.push(newNotes)
+
+
+  fs.writeFileSync("db/db.json", JSON.stringify(notes));
+  res.json(notes);
+
+//   console.log(notes);
+});
 
 //
-
-
-//
-
-
 
 app.listen(PORT, () =>
   console.log(`App listening at http://localhost:${PORT} 🚀`)
