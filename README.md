@@ -35,5 +35,5 @@
   ### N/A
 
   ## Questions:
-  ### Github: https://github.com/Haozhe-H/Employee-managment-system
+  ### Github: https://github.com/Haozhe-H/Note-taking-application
   ### Email: N/A
